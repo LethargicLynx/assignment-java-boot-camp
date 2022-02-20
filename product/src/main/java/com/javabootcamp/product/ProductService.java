@@ -3,6 +3,7 @@ package com.javabootcamp.product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public record ProductService(ProductRepository productRepository) {
@@ -18,5 +19,17 @@ public record ProductService(ProductRepository productRepository) {
 
     public List<Product> getProductsByNameContaining(String nameSearch) {
         return productRepository.findByNameContaining(nameSearch);
+    }
+
+    public ProductCheckResponse checkIfProductExistByProductId(Integer id) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        Boolean isProductExist;
+        if(optionalProduct.isEmpty()) {
+            isProductExist = false;
+        } else {
+            isProductExist = true;
+        }
+
+        return new ProductCheckResponse(isProductExist);
     }
 }

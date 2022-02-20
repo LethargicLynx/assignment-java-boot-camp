@@ -13,7 +13,7 @@ public record ProductController(ProductService productService) {
         return productService.getAllProduct();
     }
 
-    @GetMapping
+    @GetMapping(path = "/search")
     public List<Product> getProductByNameContaining(@RequestParam("search") String search) {
         return productService.getProductsByNameContaining(search);
     }
@@ -23,4 +23,8 @@ public record ProductController(ProductService productService) {
         return productService.getProductById(id);
     }
 
+    @GetMapping(path = "/product-check/{id}")
+    public ProductCheckResponse checkProductIfExistsByProductId(@PathVariable("id") Integer id) {
+        return productService.checkIfProductExistByProductId(id);
+    }
 }

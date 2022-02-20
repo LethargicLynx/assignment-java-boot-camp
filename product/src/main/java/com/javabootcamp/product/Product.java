@@ -1,11 +1,11 @@
 package com.javabootcamp.product;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.javabootcamp.product.comment.Comment;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -29,8 +29,37 @@ public class Product {
     private Double normalPrice;
     private Double discountPrice;
     private Integer remains;
-    private Double rating;
     private Double discountPercentage;
+
+    @Transient
+    private Double avgRating;
+
+    @ToString.Exclude
+    @OneToMany(
+            mappedBy = "product",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Comment> comments = new ArrayList<>();
+
+    public void addComment(Comment comment) {
+        if(!this.comments.contains(comment)) {
+            this.comments.add(comment);
+            comment.setProduct(this);
+        }
+    }
+
+    public void removeComment(Comment address) {
+        if (this.comments.contains(address)) {
+            this.comments.remove(address);
+            address.setProduct(null);
+        }
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 
 
 }
