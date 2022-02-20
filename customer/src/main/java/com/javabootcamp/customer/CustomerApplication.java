@@ -23,22 +23,19 @@ public class CustomerApplication {
             AddressRepository addressRepository) {
         return args -> {
             Faker faker = new Faker();
-            String fullName = faker.name().firstName() + " " + faker.name().lastName();
-            String email = String.format("%s.%s@skooldio.edu", faker.name().firstName(), faker.name().lastName());
-            String phoneNumber = faker.phoneNumber().phoneNumber();
 
             Customer customer = Customer.builder()
-                    .fullName(fullName)
-                    .email(email)
-                    .phoneNumber(phoneNumber)
+                    .fullName(faker.name().firstName() + " " + faker.name().lastName())
+                    .email(String.format("%s.%s@skooldio.edu", faker.name().firstName(), faker.name().lastName()))
+                    .phoneNumber(faker.phoneNumber().phoneNumber())
                     .build();
 
             Address address = Address.builder()
-                    .street("71/10-2 Moo 4 Bangwaek Road Klongkhwang")
-                    .postalCode("10160")
-                    .district("Saphan Sung")
-                    .province("Bangkok")
-                    .country("Thailand")
+                    .street(faker.address().streetName())
+                    .postalCode(faker.address().zipCode())
+                    .district(faker.address().city())
+                    .province(faker.address().city())
+                    .country(faker.address().country())
                     .build();
 
             customer.setAddresses(new ArrayList<>());
