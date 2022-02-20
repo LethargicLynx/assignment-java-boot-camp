@@ -1,6 +1,7 @@
 package com.javabootcamp.customer;
 
 import com.javabootcamp.customer.address.Address;
+import com.javabootcamp.customer.cart.Cart;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,14 @@ public class Customer {
     private String fullName;
     private String email;
     private String phoneNumber;
+
+    @OneToOne(
+            mappedBy = "customer",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+
+    )
+    private Cart cart;
 
     @ToString.Exclude
     @OneToMany(

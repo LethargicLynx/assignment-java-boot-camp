@@ -1,5 +1,6 @@
 package com.javabootcamp.customer;
 
+import com.javabootcamp.clients.product.ProductClient;
 import com.javabootcamp.customer.address.Address;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public record CustomerService(CustomerRepository customerRepository) {
+public record CustomerService(CustomerRepository customerRepository,
+                              ProductClient productClient) {
 
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder()
