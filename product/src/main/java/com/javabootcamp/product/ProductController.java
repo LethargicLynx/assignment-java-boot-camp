@@ -1,5 +1,6 @@
 package com.javabootcamp.product;
 
+import com.javabootcamp.clients.product.ProductCheckResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
