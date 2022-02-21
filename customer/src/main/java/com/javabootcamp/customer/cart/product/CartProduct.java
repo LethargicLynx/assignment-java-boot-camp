@@ -18,7 +18,7 @@ public class CartProduct {
     @Id
     @SequenceGenerator(
             name = "cartproduct_id_sequence",
-            sequenceName = "cart-product_id_sequence"
+            sequenceName = "cartproduct_id_sequence"
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
