@@ -36,4 +36,9 @@ public class CartProduct {
             )
     )
     private Cart cart;
+
+    public CartProduct(Integer productId, Cart cart) {
+        this.productId = productId;
+        this.cart = cart;
+    }
 }

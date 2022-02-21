@@ -46,6 +46,10 @@ public class Cart {
     )
     private List<CartProduct> cartProducts = new ArrayList<>();
 
+    public Cart(Customer customer) {
+        this.customer = customer;
+    }
+
     public void addCartProduct(CartProduct cartProduct) {
         if(!this.cartProducts.contains(cartProduct)) {
             this.cartProducts.add(cartProduct);

@@ -27,4 +27,10 @@ public record CustomerController(CustomerService customerService) {
         return customerService.getCustomerAddressListById(id);
     }
 
+    @PostMapping(path = "/customer/{id}/product")
+    public void addProductToCart(@PathVariable("id") Integer id,
+                                 @RequestParam(value = "productId") Integer productId) {
+        customerService.addProductToCustomerCart(id, productId);
+    }
+
 }
